@@ -264,6 +264,10 @@ class HttpScrape(SearchEngineScrape, threading.Timer):
             super().detection_prevention_sleep()
             super().keyword_info()
 
+            logger.info(
+                'Ready to make request using config: {config}'.format(
+                    config=self.config))
+
             if 'proxy_url' in self.config and 'proxy_key' in self.config:
 
                 blog_proxy_url = self.config['proxy_url']
