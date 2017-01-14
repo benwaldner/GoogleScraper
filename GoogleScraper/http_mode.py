@@ -281,7 +281,7 @@ class HttpScrape(SearchEngineScrape, threading.Timer):
                     request = self.requests.post(
                                 url=blog_proxy_url,
                                 headers=self.headers,
-                                post_data=params,
+                                data=params,
                                 timeout=timeout)
                 else: #get
                     request = self.requests.get(
