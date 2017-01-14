@@ -264,8 +264,32 @@ class HttpScrape(SearchEngineScrape, threading.Timer):
             super().detection_prevention_sleep()
             super().keyword_info()
 
-            request = self.requests.get(self.base_search_url + urlencode(self.search_params),
-                                        headers=self.headers, timeout=timeout)
+            if 'proxy_url' in self.config and 'proxy_key' in self.config:
+
+                blog_proxy_url = self.config['proxy_url']
+
+                params = {
+                    'url': self.base_search_url + urlencode(self.search_params),
+                    'secure': self.config['proxy_key']
+                }
+                if self.config.get('http_method', None) == 'post':
+
+                    request = requests.post(
+                                url=blog_proxy_url,
+                                headers=self.headers,
+                                post_data=params,
+                                timeout=timeout)
+                else: #get
+                    request = request.get(
+                                url=blog_proxy_url + "?" + urlencode(params),
+                                headers=self.headers,
+                                timeout=timeout)
+
+            else:
+                request = self.requests.get(
+                    self.base_search_url + urlencode(self.search_params),
+                    headers=self.headers,
+                    timeout=timeout)
 
             self.requested_at = datetime.datetime.utcnow()
             self.html = request.text
