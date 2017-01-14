@@ -291,6 +291,12 @@ class HttpScrape(SearchEngineScrape, threading.Timer):
                     headers=self.headers,
                     timeout=timeout)
 
+            logger.info(
+                'Completed {method} request to {url} with body: {body}'.format(
+                    method=request.request.method,
+                    url=request.url,
+                    body=request.request.body or "-empty body-"))
+
             self.requested_at = datetime.datetime.utcnow()
             self.html = request.text
 
