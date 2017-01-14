@@ -276,7 +276,7 @@ class HttpScrape(SearchEngineScrape, threading.Timer):
                     'url': self.base_search_url + urlencode(self.search_params),
                     'secure': self.config['proxy_key']
                 }
-                if self.config.get('http_method', None) == 'post':
+                if self.config.get('proxy_http_method', None) == "post":
 
                     request = requests.post(
                                 url=blog_proxy_url,
