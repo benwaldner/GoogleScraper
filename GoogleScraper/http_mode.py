@@ -278,13 +278,13 @@ class HttpScrape(SearchEngineScrape, threading.Timer):
                 }
                 if self.config.get('proxy_http_method', None) == "post":
 
-                    request = requests.post(
+                    request = self.requests.post(
                                 url=blog_proxy_url,
                                 headers=self.headers,
                                 post_data=params,
                                 timeout=timeout)
                 else: #get
-                    request = request.get(
+                    request = self.requests.get(
                                 url=blog_proxy_url + "?" + urlencode(params),
                                 headers=self.headers,
                                 timeout=timeout)
