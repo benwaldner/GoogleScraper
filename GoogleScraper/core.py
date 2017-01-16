@@ -170,7 +170,8 @@ def main(return_results=False, parse_cmd_line=True, config_from_dict=None):
     if isinstance(config['log_level'], int):
         config['log_level'] = logging.getLevelName(config['log_level'])
 
-    setup_logger(level=config.get('log_level').upper())
+    # Tom, Jan 16: removing this logger override
+    # setup_logger(level=config.get('log_level').upper())
 
     if config.get('view_config', False):
         print(open(os.path.join(get_base_path(), 'scrape_config.py')).read())
